@@ -27,3 +27,38 @@
   )
 
 (problem-2 4000000)
+
+;;;;;;;;;;;;;;
+
+; Based on http://stackoverflow.com/a/7625207
+
+(defn gen-primes "Generates an infinite, lazy sequence of prime numbers"
+  []
+  (let [reinsert (fn [table x prime]
+                   (update-in table [(+ prime x)] conj prime))]
+    (defn primes-step [table d]
+      (if-let [factors (get table d)]
+        (recur (reduce #(reinsert %1 d %2) (dissoc table d) factors)
+               (inc d))
+        (lazy-seq (cons d (primes-step (assoc table (* d d) (list d))
+                                       (inc d))))))
+    (primes-step {} 2)))
+
+(defn factors [n]
+  (loop [n n primes (gen-primes) fs #{}]
+    (let [[p & ps] primes]
+      (cond
+       (= n 1) fs
+       (= 0 (mod n p)) (recur (/ n p) primes (conj fs p))
+       :else (recur n ps fs))
+      )
+    )
+  )
+
+(defn problem-3 [number-to-factor]
+  "The prime factors of 13195 are 5, 7, 13 and 29.
+   What is the largest prime factor of the number 600851475143 ?"
+  (apply max (factors number-to-factor))
+  )
+
+(problem-3 600851475143)
