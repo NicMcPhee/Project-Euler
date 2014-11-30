@@ -62,3 +62,24 @@
   )
 
 (problem-3 600851475143)
+
+;;;;;;;;;;;;;;;;
+
+(defn gcd [a b]
+  (if (= b 0)
+    a
+    (gcd b (mod a b))))
+
+(defn lcd [a b]
+  (/ (* a b) (gcd a b)))
+
+(defn problem-5 [upper-limit]
+  "2520 is the smallest number that can be divided by each of the numbers
+  from 1 to 10 without any remainder.
+
+  What is the smallest positive number that is evenly divisible by all
+  of the numbers from 1 to 20?"
+  (reduce lcd (range 1 (inc upper-limit)))
+  )
+
+(problem-5 20)
