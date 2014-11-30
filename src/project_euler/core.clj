@@ -65,6 +65,26 @@
 
 ;;;;;;;;;;;;;;;;
 
+(defn palindromic? [n]
+  (let [ns (str n)]
+    (= ns (clojure.string/reverse ns))))
+
+(defn problem-4 [start end]
+  "A palindromic number reads the same both ways. The largest palindrome
+  made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+  Find the largest palindrome made from the product of two 3-digit numbers."
+  (apply max
+         (for [x (range start end)
+               y (range x end)
+               :when (palindromic? (* x y))]
+           (* x y))
+         ))
+
+(problem-4 100 1000)
+
+;;;;;;;;;;;;;;;;
+
 (defn gcd [a b]
   (if (= b 0)
     a
