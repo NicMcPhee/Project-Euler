@@ -114,3 +114,10 @@
     (- (* sum sum) sum-of-sqrs)))
 
 (problem-6 100)
+
+;;;;;;;;;;;;;;;;
+
+(defn problem-7 [which-prime]
+  (nth (gen-primes) (dec which-prime)))
+
+(problem-7 10001)
