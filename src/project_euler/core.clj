@@ -103,3 +103,14 @@
   )
 
 (problem-5 20)
+
+;;;;;;;;;;;;;;;;
+
+(defn problem-6 [upper-limit]
+  (let [values (range (inc upper-limit))
+        sum (reduce + values)
+        sqrs (map #(* % %) values)
+        sum-of-sqrs (reduce + sqrs)]
+    (- (* sum sum) sum-of-sqrs)))
+
+(problem-6 100)
