@@ -203,3 +203,14 @@
     (map #(apply * %) triples)))
 
 (problem-9 1000)
+
+;;;;;;;;;;;;;;;;
+
+
+(defn problem-10 [upper-bound]
+  "The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+   Find the sum of all the primes below two million."
+  (apply + (take-while #(< % upper-bound) (gen-primes))))
+
+(problem-10 2000000)
