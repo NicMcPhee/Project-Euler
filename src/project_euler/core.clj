@@ -180,3 +180,26 @@
     (apply max products)))
 
 (problem-8 13)
+
+;;;;;;;;;;;;;;;;
+
+(defn problem-9 [total]
+  "A Pythagorean triplet is a set of three natural numbers,
+  a < b < c, for which,
+
+     a^2 + b^2 = c^2
+
+  For example, 32 + 42 = 9 + 16 = 25 = 52.
+
+  There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+
+  Find the product abc."
+  (let
+    [triples (for [a (range 1 total)
+                   b (range a (- total a))
+                   :let [c (- total (+ a b))]
+                   :when (= (+ (* a a) (* b b)) (* c c))]
+               [a b c])]
+    (map #(apply * %) triples)))
+
+(problem-9 1000)
